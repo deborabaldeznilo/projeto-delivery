@@ -88,7 +88,7 @@ No menu Kernel, selecione a opção de reiniciar o kernel e executar todas as c�
 | Caminho | Conteúdo |
 |---|---|
 | `README.md` | Apresentação do projeto, resultados e instruções |
-| `requirements.txt` | Dependências com versões, a conferir antes da publicação final |
+| `requirements.txt` | Dependências com as versões utilizadas |
 | `projeto_final.ipynb` | Análise e respostas das Etapas 1 a 11 |
 | `autoavaliacao.md` | Autoavaliação, a incluir quando preenchida |
 | `dados/delivery_pedidos.csv` | Base original preservada |
@@ -135,6 +135,12 @@ Após o tratamento das sete distâncias inválidas, a coluna `distancia_km` fico
 Não foram encontradas linhas totalmente duplicadas nem identificadores de pedido repetidos. **Todas as 8.058 linhas foram preservadas.**
 
 ## 6. Principais achados
+
+![Chuva, tempo de entrega e avaliação dos clientes](saidas/figura_principal.png)
+
+*À esquerda, tempo médio de entrega com e sem chuva. À direita,
+avaliação média até e acima de 35 minutos. Foram considerados
+tempos válidos e, no painel de avaliação, notas preenchidas.*
 
 1. **Com chuva, as entregas demoraram em média 9,13 minutos a mais.** O tempo médio foi de 42,36 minutos com chuva e 33,23 sem chuva, conforme as Tarefas 6.8 e 9.1, com Mann–Whitney. A diferença deve ser considerada no planejamento da operação e dos prazos em dias chuvosos.
 
@@ -199,5 +205,14 @@ Os p-valores foram avaliados individualmente, sem ajuste para múltiplos testes.
 | Nome | GitHub | Principais contribuições |
 |---|---|---|
 | Débora Araujo Baldez Nilo | @deborabaldeznilo | Perguntas de negócio, inspeção, limpeza, análise, visualizações, testes e comunicação dos resultados |
+
+### Validação da execução
+
+O projeto foi testado em um clone do repositório, com ambiente virtual novo e as dependências do `requirements.txt`. Todas as células do notebook foram executadas do início ao fim, sem erros.
+
+- **Data do teste:** 09/11/2026.
+- **Python:** 3.14.7.
+- **Bibliotecas:** versões registradas no `requirements.txt`.
+- **Tempo da execução completa:** 28 seconds.
 
 *Projeto final do módulo DS-PY-018 · Análise Exploratória de Dados · Novembro de 2026*
