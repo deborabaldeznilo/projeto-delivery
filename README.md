@@ -4,7 +4,7 @@
 
 # Chuva acompanha entregas mais lentas e maior demora acompanha avaliações menores
 
-> O prazo de entrega merece atenção no planejamento de 2025. As entregas com chuva demoraram, em média, 9,13 minutos a mais.A empresa deve testar melhorias na operação e acompanhar os atrasos e a satisfação dos clientes.
+> O prazo de entrega merece atenção no planejamento de 2025. As entregas com chuva demoraram, em média, 9,13 minutos a mais. A empresa deve testar melhorias na operação e acompanhar os atrasos e a satisfação dos clientes.
 
 
 ![Chuva, tempo de entrega e avaliação dos clientes](saidas/figura_principal.png)
