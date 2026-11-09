@@ -65,24 +65,23 @@ Arquivo publicado em `saidas/delivery_pedidos_limpo.csv`. Os tipos abaixo repres
 
 Os comandos abaixo consideram Windows PowerShell, notebook na raiz e a base original em `dados/delivery_pedidos.csv`.
 
+Execute um comando por vez:
+
 ```powershell
 git clone https://github.com/deborabaldeznilo/projeto-delivery.git
 cd projeto-delivery
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-jupyter notebook projeto_final.ipynb
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m notebook projeto_final.ipynb
 ```
 
-No notebook, configure o caminho da base para essa estrutura antes da execução completa.
+No notebook, confira se o caminho da base está configurado assim:
 
 ```python
 DADOS = "dados/"
 ```
 
-Selecione o ambiente criado como kernel e execute **Restart & Run All / Reiniciar e executar tudo**. As etapas de publicação geram a base limpa e a figura na pasta `saidas/`.
-
-## 4. Estrutura do repositório
+No menu Kernel, selecione a opção de reiniciar o kernel e executar todas as células. Ao terminar, confira se não houve erros e se os arquivos de saída foram gerados na pasta `saidas`.## 4. Estrutura do repositório
 
 | Caminho | Conteúdo |
 |---|---|
