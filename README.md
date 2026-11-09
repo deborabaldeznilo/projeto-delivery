@@ -81,7 +81,9 @@ No notebook, confira se o caminho da base está configurado assim:
 DADOS = "dados/"
 ```
 
-No menu Kernel, selecione a opção de reiniciar o kernel e executar todas as células. Ao terminar, confira se não houve erros e se os arquivos de saída foram gerados na pasta `saidas`.## 4. Estrutura do repositório
+No menu Kernel, selecione a opção de reiniciar o kernel e executar todas as células. Ao terminar, confira se não houve erros e se os arquivos de saída foram gerados na pasta `saidas`.
+
+## 4. Estrutura do repositório
 
 | Caminho | Conteúdo |
 |---|---|
