@@ -82,13 +82,6 @@ DADOS = "dados/"
 
 Selecione o ambiente criado como kernel e execute **Restart & Run All / Reiniciar e executar tudo**. As etapas de publicação geram a base limpa e a figura na pasta `saidas/`.
 
-**Pendências de validação da execução**
-
-- Gerar o arquivo `requirements.txt` com as versões do ambiente usado na execução final. As bibliotecas utilizadas são pandas, NumPy, seaborn, matplotlib, SciPy e Jupyter.
-- Registrar a versão do Python e as versões das bibliotecas após conferir o ambiente final.
-- Medir o tempo da execução completa.
-- Testar as instruções em um clone limpo do repositório.
-
 ## 4. Estrutura do repositório
 
 | Caminho | Conteúdo |
@@ -114,26 +107,31 @@ Selecione o ambiente criado como kernel e execute **Restart & Run All / Reinicia
 9. **Testes de hipótese** — Foram usados Mann–Whitney, Spearman, Kruskal–Wallis e qui-quadrado, com alfa de 5%, além de ANOVA complementar e tamanhos de efeito.
 10. **Conclusões** — Foram selecionados cinco achados, três recomendações e limitações para apoiar o planejamento de 2025.
 
+
 ### Decisões de limpeza
 
-As quantidades abaixo podem se sobrepor, pois um pedido pode apresentar mais de um problema.
+A base original foi preservada, e a limpeza foi feita na cópia `df`.
+As quantidades abaixo podem se sobrepor, pois um pedido pode apresentar
+mais de um problema.
 
 | Problema | Linhas afetadas | Decisão | Alternativa considerada |
 |---|---:|---|---|
-| País e moeda constantes | 8.058, em duas colunas | Remover as duas colunas | Manter informações sem variação |
-| Data e hora como texto | 8.058 | Converter para datetime e criar colunas temporais | Converter somente durante cada análise |
-| Grafias diferentes de cidade | 997 valores alterados | Padronizar para três cidades | Agrupar pelas grafias originais |
-| Grafias diferentes de pagamento | 666 valores alterados | Padronizar para quatro formas | Agrupar pelas grafias originais |
-| Formatos monetários que falharam na conversão direta | 720 | Limpar o texto e converter sem criar faltantes | Tratar falhas de conversão como ausentes |
-| Cupom como texto | 8.058 | Converter Sim/Não para booleano | Manter como categoria textual |
-| Plataforma ausente | 153 | Preencher com “Não informada” | Preencher com a plataforma mais frequente |
-| Avaliação ausente | 1.342 | Manter ausente e usar notas preenchidas nas análises | Preencher com uma medida central |
-| Distância ausente na origem | 315 | Manter ausente | Estimar pela taxa, possibilidade investigada na Tarefa 8.3 |
-| Tempo negativo ou igual a 999 | 33 | Substituir por NaN e criar flag | Remover o pedido inteiro |
-| Distância acima de 100 km | 7 | Substituir por NaN e criar flag | Remover o pedido inteiro |
-| Pedidos acima de quatro vezes a mediana da cozinha | 26 | Manter e criar flag de pedido grande | Excluir os valores extremos |
+| País e moeda constantes | 8.058 linhas em cada coluna | Remover as duas colunas, pois não apresentam variação | Manter as colunas |
+| Data e hora como texto | 8.058 | Converter para datetime e criar as colunas de data, mês, hora e dia da semana | Converter somente durante cada análise |
+| Grafias diferentes de cidade | 997 valores alterados | Padronizar para São Paulo, Rio de Janeiro e Belo Horizonte | Manter as grafias originais |
+| Grafias diferentes de pagamento | 666 valores alterados | Padronizar para quatro formas de pagamento | Manter as grafias originais |
+| Formatos monetários que falharam na conversão direta | 720 | Padronizar o texto e converter todos os valores para número, sem criar faltantes | Tratar as falhas de conversão como ausentes |
+| Cupom como texto | 8.058 | Converter `Sim` para `True` e `Não` para `False` | Manter como texto |
+| Plataforma ausente | 153 | Preencher com “Não informada”, sem presumir qual plataforma foi usada | Preencher com a plataforma mais frequente |
+| Avaliação ausente | 1.342 | Manter ausente após investigar os faltantes e usar as notas preenchidas nas análises | Preencher com média ou mediana |
+| Distância ausente na base original | 315 | Manter ausente | Estimar pela taxa de entrega, possibilidade investigada na Tarefa 8.3 |
+| Tempo de entrega negativo ou igual a 999 | 33 | Substituir por `NaN` e criar a flag `tempo_invalido` | Remover o pedido inteiro |
+| Distância acima de 100 km | 7 | Substituir por `NaN` e criar a flag `distancia_invalida` | Remover o pedido inteiro |
+| Pedidos acima de quatro vezes a mediana da sua cozinha | 26 | Manter os valores e criar a flag `pedido_grande`, pois foram considerados pedidos grandes plausíveis | Excluir os valores extremos |
 
-Não foram encontradas linhas totalmente duplicadas nem identificadores de pedido repetidos.
+Após o tratamento das sete distâncias inválidas, a coluna `distancia_km` ficou com **322 valores ausentes**: 315 que já estavam ausentes e sete identificados na limpeza.
+
+Não foram encontradas linhas totalmente duplicadas nem identificadores de pedido repetidos. **Todas as 8.058 linhas foram preservadas.**
 
 ## 6. Principais achados
 
@@ -158,7 +156,7 @@ Não foram encontradas linhas totalmente duplicadas nem identificadores de pedid
 | H5 — Cidade × pagamento | Qui-quadrado | 0,6951 | V de Cramér = 0,0155 | Não rejeitar H0 | Sem evidência suficiente de associação |
 | H6 — Taxa × avaliação | Spearman unilateral | 1,92 × 10⁻¹⁹ | rho = −0,1088 | Rejeitar H0 | Associação negativa fraca, menos evidente dentro das faixas de tempo |
 
-A ANOVA complementar de H4 apresentou F = 286,82 e p-valor de aproximadamente 2,94 × 10⁻²⁸³. O eta-quadrado representa a parcela da variação do ticket associada às diferenças entre as médias das cozinhas. Os testes globais não identificam quais pares diferem.
+A ANOVA complementar de H4 apresentou F = 286,82 e p-valor de aproximadamente 2,94 × 10⁻²⁸³. O eta-quadrado representa a parcela da variação do ticket associada às diferenças entre as médias das cozinhas. 
 
 Como contraste em H5, cupom × cliente novo apresentou qui-quadrado de 435,30, p-valor de aproximadamente 1,14 × 10⁻⁹⁶ e V de Cramér de 0,2324. Foram usados testes sem correção de continuidade. Clientes novos representaram 34,35% dos pedidos com cupom e 12,81% dos sem cupom.
 
